@@ -5,3 +5,5 @@ simclr,linear_probe,train_100pct,resnet18,10,78.57,78.80,80.32,78.57
 scratch,full_finetune,train_100pct,resnet18,10,100.00,100.00,100.00,100.00
 simclr,linear_probe,train_10pct,resnet18,10,19.05,9.59,19.91,19.05
 scratch,full_finetune,train_10pct,resnet18,10,19.05,9.03,19.51,19.05
+simclr,linear_probe,train_100pct,resnet18,10,78.57,78.80,80.32,78.57
+scratch,full_finetune,train_100pct,resnet18,10,100.00,100.00,100.00,100.00

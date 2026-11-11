@@ -43,3 +43,4 @@ venv.bak/
 
 # Streamlit temporary
 .streamlit/secrets.toml
+
