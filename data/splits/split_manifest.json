@@ -1,0 +1,61 @@
+{
+  "classes": [
+    "crazing",
+    "inclusion",
+    "patches",
+    "pitted_surface",
+    "rolled_in_scale",
+    "scratches"
+  ],
+  "num_classes": 6,
+  "splits": {
+    "unlabeled_pretrain": 216,
+    "val": 42,
+    "test": 42,
+    "train_100pct": {
+      "crazing": 36,
+      "inclusion": 36,
+      "patches": 36,
+      "pitted_surface": 36,
+      "rolled_in_scale": 36,
+      "scratches": 36
+    },
+    "train_100pct_total": 216,
+    "train_25pct": {
+      "crazing": 9,
+      "inclusion": 9,
+      "patches": 9,
+      "pitted_surface": 9,
+      "rolled_in_scale": 9,
+      "scratches": 9
+    },
+    "train_25pct_total": 54,
+    "train_10pct": {
+      "crazing": 4,
+      "inclusion": 4,
+      "patches": 4,
+      "pitted_surface": 4,
+      "rolled_in_scale": 4,
+      "scratches": 4
+    },
+    "train_10pct_total": 24,
+    "train_5pct": {
+      "crazing": 2,
+      "inclusion": 2,
+      "patches": 2,
+      "pitted_surface": 2,
+      "rolled_in_scale": 2,
+      "scratches": 2
+    },
+    "train_5pct_total": 12,
+    "train_1pct": {
+      "crazing": 1,
+      "inclusion": 1,
+      "patches": 1,
+      "pitted_surface": 1,
+      "rolled_in_scale": 1,
+      "scratches": 1
+    },
+    "train_1pct_total": 6
+  }
+}

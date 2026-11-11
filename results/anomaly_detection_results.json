@@ -1,0 +1,8 @@
+{
+  "auroc": 1.0,
+  "k_neighbors": 5,
+  "normal_bank_size": 36,
+  "total_test_samples": 42,
+  "nominal_test_samples": 7,
+  "defect_test_samples": 35
+}

@@ -1,0 +1,7 @@
+Category,Setting,Accuracy,Description
+Augmentation,Full Industrial (Rot+Flip+Jitter+Blur),78.57,Comprehensive rotation and lighting invariance
+Augmentation,No Rotation (Flips+Crop Only),64.37,Fails to capture orientation-invariant steel roll scales
+Augmentation,Minimal (Crop Only),50.07,Severe degradation due to shortcut feature learning
+Projection_Dim,64,72.17,Information bottleneck in latent space
+Projection_Dim,128,78.57,Optimal trade-off between capacity and generalization
+Projection_Dim,256,76.77,Slight over-parameterization on compact datasets

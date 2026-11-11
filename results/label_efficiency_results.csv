@@ -1,0 +1,21 @@
+Method,Split,Accuracy,F1_Score,Precision,Recall
+SimCLR (Linear Probe),1%,16.67,4.86,2.85,16.67
+SimCLR (Fine-Tuned),1%,19.05,9.03,19.51,19.05
+Supervised (Scratch),1%,16.67,4.76,2.78,16.67
+Supervised (ImageNet),1%,54.76,54.03,71.62,54.76
+SimCLR (Linear Probe),5%,26.19,13.42,9.04,26.19
+SimCLR (Fine-Tuned),5%,16.67,6.67,4.17,16.67
+Supervised (Scratch),5%,16.67,4.76,2.78,16.67
+Supervised (ImageNet),5%,83.33,82.41,91.67,83.33
+SimCLR (Linear Probe),10%,19.05,9.72,20.0,19.05
+SimCLR (Fine-Tuned),10%,47.62,33.89,27.83,47.62
+Supervised (Scratch),10%,16.67,4.76,2.78,16.67
+Supervised (ImageNet),10%,78.57,75.83,87.5,78.57
+SimCLR (Linear Probe),25%,21.43,15.03,24.58,21.43
+SimCLR (Fine-Tuned),25%,73.81,70.14,71.3,73.81
+Supervised (Scratch),25%,16.67,4.76,2.78,16.67
+Supervised (ImageNet),25%,90.48,89.63,93.94,90.48
+SimCLR (Linear Probe),100%,69.05,64.67,66.67,69.05
+SimCLR (Fine-Tuned),100%,92.86,93.0,95.0,92.86
+Supervised (Scratch),100%,92.86,93.0,95.0,92.86
+Supervised (ImageNet),100%,100.0,100.0,100.0,100.0

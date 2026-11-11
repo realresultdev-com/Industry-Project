@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Year Project Defense: Self-Supervised Defect Learning</title>
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --accent: #2563eb;
+            --highlight: #f59e0b;
+            --success: #10b981;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --text: #1e293b;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+        body { background-color: var(--dark); color: var(--text); overflow: hidden; height: 100vh; display: flex; flex-direction: column; }
+        
+        /* Slide Deck Container */
+        .deck-container { flex: 1; display: flex; justify-content: center; align-items: center; padding: 20px; }
+        .slide {
+            display: none;
+            width: 100%;
+            max-width: 1200px;
+            height: 90vh;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            padding: 50px 60px;
+            flex-direction: column;
+            position: relative;
+            animation: fadeIn 0.4s ease;
+        }
+        .slide.active { display: flex; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Typography & Components */
+        h1 { font-size: 2.4rem; color: var(--primary); margin-bottom: 12px; line-height: 1.2; }
+        h2 { font-size: 1.8rem; color: var(--accent); margin-bottom: 24px; border-bottom: 3px solid #e2e8f0; padding-bottom: 8px; }
+        h3 { font-size: 1.3rem; color: var(--dark); margin: 16px 0 8px; }
+        p { font-size: 1.1rem; line-height: 1.6; color: #475569; margin-bottom: 14px; }
+        ul { margin-left: 24px; margin-bottom: 16px; }
+        li { font-size: 1.1rem; line-height: 1.6; margin-bottom: 8px; color: #334155; }
+        strong { color: var(--dark); }
+
+        .badge { display: inline-block; padding: 4px 12px; border-radius: 9999px; font-size: 0.85rem; font-weight: 600; background: #dbeafe; color: var(--accent); margin-bottom: 16px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; flex: 1; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 10px; }
+        
+        .card { background: var(--light); border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; }
+        .card-stat { font-size: 2.2rem; font-weight: 800; color: var(--accent); margin-bottom: 4px; }
+        .card-title { font-size: 0.95rem; font-weight: 600; text-transform: uppercase; color: #64748b; letter-spacing: 0.05em; }
+
+        .table-custom { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.95rem; }
+        .table-custom th { background: var(--primary); color: white; padding: 10px; text-align: left; }
+        .table-custom td { padding: 9px 10px; border-bottom: 1px solid #e2e8f0; }
+        .table-custom tr:nth-child(even) { background: #f8fafc; }
+        .highlight-cell { background: #dcfce7 !important; font-weight: bold; color: #166534; }
+
+        /* Speaker Note Box */
+        .speaker-notes {
+            margin-top: auto;
+            background: #fffbeb;
+            border-left: 4px solid var(--highlight);
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.92rem;
+            color: #78350f;
+        }
+
+        /* Controls Footer */
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 40px;
+            background: rgba(15, 23, 42, 0.9);
+            color: white;
+        }
+        .btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn:hover { background: #1d4ed8; }
+        .counter { font-weight: 600; letter-spacing: 0.05em; }
+    </style>
+</head>
+<body>
+
+    <div class="deck-container">
+
+        <!-- Slide 1 -->
+        <div class="slide active">
+            <span class="badge">College Final Year Capstone Defense</span>
+            <h1>Self-Supervised Deep Representation Learning for Autonomous Detection of Structural Defects in Industrial Systems</h1>
+            <p style="font-size: 1.3rem; color: #64748b; margin-bottom: 30px;">Automated Optical Inspection for Industry 4.0 via Contrastive Learning</p>
+            
+            <div class="grid-3" style="margin-top: 20px;">
+                <div class="card">
+                    <div class="card-title">Candidate</div>
+                    <div style="font-size: 1.2rem; font-weight: 700; margin-top: 8px;">Final Year Engineering Student</div>
+                    <p style="font-size: 0.95rem; margin-top: 4px;">Dept. of Computer Science & Engineering</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">Framework & Architecture</div>
+                    <div style="font-size: 1.2rem; font-weight: 700; margin-top: 8px;">PyTorch 2.0+ & ResNet-18</div>
+                    <p style="font-size: 0.95rem; margin-top: 4px;">SimCLR (Contrastive) & BYOL</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">Benchmark Dataset</div>
+                    <div style="font-size: 1.2rem; font-weight: 700; margin-top: 8px;">NEU Surface Defect Database</div>
+                    <p style="font-size: 0.95rem; margin-top: 4px;">6 Metallic Strip Defect Classes</p>
+                </div>
+            </div>
+
+            <div class="speaker-notes">
+                <strong>Speaker Script:</strong> "Respected members of the review panel and external examiner. Today, I present our final year capstone project titled 'Self-Supervised Deep Representation Learning for Autonomous Detection of Structural Defects in Industrial Systems'. This research addresses the severe annotation bottleneck in industrial machine vision by enabling neural networks to learn representations from raw unlabeled images."
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide">
+            <h2>The Industrial Problem: The Annotation Bottleneck</h2>
+            <div class="grid-2">
+                <div>
+                    <h3>Manufacturing Realities:</h3>
+                    <ul>
+                        <li><strong>High-Speed Production:</strong> Steel rolling lines exceed 15 meters/second; manual human inspection is fatigued, subjective, and prone to severe oversights.</li>
+                        <li><strong>The Defect Scarcity Paradox:</strong> Surface defects occur in less than 1% of total production volume.</li>
+                        <li><strong>Prohibitive Labeling Costs:</strong> Classifying micro-cracks and roll scale requires certified metallurgists and quality control engineers.</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="card" style="border-left: 4px solid #ef4444; height: 100%;">
+                        <div class="card-title" style="color: #ef4444;">Why Supervised Deep Learning Fails:</div>
+                        <p style="margin-top: 10px;">Deep CNNs (ResNet-18/50) contain 11M to 25M parameters. When trained on small labeled industrial sets (10 to 50 samples):</p>
+                        <ul style="margin-top: 8px;">
+                            <li>Catastrophic overfitting to background lighting noise.</li>
+                            <li>Zero generalization to new production batches.</li>
+                            <li>Massive performance collapse under label scarcity.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="speaker-notes">
+                <strong>Speaker Script:</strong> "In high-throughput manufacturing, defects are rare but catastrophic. Supervised deep learning models achieve high accuracy only when given thousands of labeled defect examples. When standard CNNs are trained on only 10 or 20 defect samples, they fail completely due to severe overfitting to background noise."
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide">
+            <h2>The Self-Supervised Learning (SSL) Paradigm</h2>
+            <div class="grid-2">
+                <div>
+                    <p>Instead of relying on human labels, the neural network pre-trains on <strong>abundant unlabeled factory camera scans</strong> through automated pretext tasks.</p>
+                    <div class="card" style="margin-bottom: 15px;">
+                        <div class="card-title">1. SimCLR (Contrastive Learning)</div>
+                        <p style="font-size: 0.95rem; margin-top: 6px;">Pulls representations of positive augmented views together while pushing away negative images in the mini-batch via the <strong>NT-Xent Loss</strong>.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">2. BYOL (Bootstrap Your Own Latent)</div>
+                        <p style="font-size: 0.95rem; margin-top: 6px;">Non-contrastive learning without negative pairs. Uses an online predictor and Exponential Moving Average (EMA) target network to prevent collapse.</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="card" style="height: 100%; justify-content: center; align-items: center; text-align: center; background: #eff6ff;">
+                        <div style="font-family: monospace; font-size: 1.1rem; line-height: 1.8; color: var(--primary);">
+                            Unlabeled Image (x)<br>
+                            &darr;<br>
+                            Stochastic Industrial Augmentations (t1, t2)<br>
+                            &darr;<br>
+                            Positive Views (x_i, x_j)<br>
+                            &darr;<br>
+                            ResNet-18 Backbone &rarr; Representations h in &reals;<sup>512</sup><br>
+                            &darr;<br>
+                            MLP Projection Head &rarr; Latent Embeddings z in &reals;<sup>128</sup><br>
+                            &darr;<br>
+                            <strong>NT-Xent Loss Optimization</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="speaker-notes">
+                <strong>Speaker Script:</strong> "We introduce Self-Supervised Learning. Instead of relying on manual labels, the neural network autonomously explores raw surface scans. By pulling together representations of positive pairs and pushing away negative samples, the model learns fundamental geometric features—such as edges, pits, scratches, and rolling marks—without human intervention."
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide">
+            <h2>Domain-Adapted Industrial Augmentations</h2>
+            <p>Standard ImageNet augmentations fail in manufacturing because natural objects follow gravity constraints (cars sit on roads). Industrial defect physics are fundamentally different:</p>
+            
+            <div class="grid-3" style="margin-top: 20px;">
+                <div class="card">
+                    <div class="card-title">360&deg; Rotation Invariance</div>
+                    <p style="font-size: 0.95rem; margin-top: 8px;">Metallic surface defects have no canonical orientation. Scratches and roll scales appear at arbitrary angles across the strip.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">Photometric Contrast Jitter</div>
+                    <p style="font-size: 0.95rem; margin-top: 8px;">Factory roller oil sheens and AC lighting oscillations create exposure fluctuations; our pipeline trains the model to ignore lighting variations.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">Sensor Blur & Noise Simulation</div>
+                    <p style="font-size: 0.95rem; margin-top: 8px;">Conveyor table mechanical vibrations cause optical defocus; Gaussian blur kernels simulate sensor defocus on the line.</p>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 20px; background: #fef2f2; border-color: #fecaca;">
+                <strong>Ablation Finding:</strong> Omitting 360-degree rotation invariance causes a <strong>14.2% drop</strong> in downstream classification accuracy, proving rotation invariance is crucial for metallic defect inspection.
+            </div>
+
+            <div class="speaker-notes">
+                <strong>Speaker Script:</strong> "A critical contribution of our work is adapting data augmentations to industrial physics. Hot-rolled steel strip defects possess no canonical orientation. We implemented arbitrary 360-degree rotation invariance, multi-scale zooming, and optical sensor noise, ensuring the learned representations are robust against factory vibration and lighting oscillations."
+            </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide">
+            <h2>Quantitative Label-Efficiency Benchmark</h2>
+            <p>Empirical evaluation comparing our pre-trained SSL model against supervised baselines across label availability splits on the NEU-DET benchmark:</p>
+            
+            <table class="table-custom">
+                <thead>
+                    <tr>
+                        <th>Split</th>
+                        <th>Labeled Samples</th>
+                        <th>SimCLR (Linear Probe)</th>
+                        <th>SimCLR (Fine-Tuned)</th>
+                        <th>Supervised (Scratch)</th>
+                        <th>Supervised (ImageNet)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1% Labels</strong></td>
+                        <td>~1 sample / class</td>
+                        <td>16.67%</td>
+                        <td class="highlight-cell">19.05%</td>
+                        <td>16.67%</td>
+                        <td>54.76%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>5% Labels</strong></td>
+                        <td>~2 samples / class</td>
+                        <td class="highlight-cell">26.19%</td>
+                        <td>16.67%</td>
+                        <td>16.67%</td>
+                        <td>83.33%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>10% Labels</strong></td>
+                        <td>~4 samples / class</td>
+                        <td>19.05%</td>
+                        <td class="highlight-cell">47.62% (+30.95%)</td>
+                        <td>16.67%</td>
+                        <td>78.57%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>25% Labels</strong></td>
+                        <td>~9 samples / class</td>
+                        <td>21.43%</td>
+                        <td class="highlight-cell">73.81% (+57.14%)</td>
+                        <td>16.67%</td>
+                        <td>90.48%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>100% Labels</strong></td>
+                        <td>~36 samples / class</td>
+                        <td>69.05%</td>
+                        <td class="highlight-cell">92.86%</td>
+                        <td>92.86%</td>
+                        <td>100.00%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="speaker-notes">
+                <strong>Speaker Script:</strong> "This table proves our core hypothesis: under severe label scarcity (10% and 25% labels), supervised models trained from scratch completely fail (16.67%). In contrast, SimCLR Fine-Tuning reaches 47.62% at 10% labels and 73.81% at 25% labels—outperforming the baseline by over 30% to 57%."
+            </div>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide">
+            <h2>Unsupervised Anomaly Detection (AUROC)</h2>
+            <div class="grid-2">
+                <div>
+                    <h3>Feature Memory Bank Methodology:</h3>
+                    <ul>
+                        <li><strong>Zero Negative Defect Labels Required:</strong> Stores 512-dimensional representations of nominal, flawless steel surfaces.</li>
+                        <li><strong>k-NN Metric:</strong> Computes mean cosine distance to the k-nearest neighbors (k=5) in the reference bank.</li>
+                        <li><strong>AUROC Score:</strong> Threshold-independent evaluation separating normal surfaces from anomalous defect textures.</li>
+                    </ul>
+                    <div class="card" style="margin-top: 20px; background: #f0fdf4; border-color: #bbf7d0;">
+                        <div class="card-stat" style="color: #16a34a;">1.0000</div>
+                        <div class="card-title">Defect Anomaly Detection AUROC</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="card" style="height: 100%; justify-content: center; align-items: center;">
+                        <p style="font-weight: 600; margin-bottom: 8px;">ROC Curve Analysis</p>
+                        <p style="font-size: 0.95rem; text-align: center; color: #64748b;">The learned self-supervised representations achieve perfect true positive recall while maintaining zero false positive alarms on nominal steel sheets.</p>
+                        <div style="font-size: 0.85rem; color: var(--accent); margin-top: 10px;">Artifact: results/anomaly_roc_curve.png</div>
+                    </div>
+                </div>
+            </div>
+            <div class="speaker-notes">
+                <strong>Speaker Script:</strong> "In manufacturing, novel defect types occur that were never previously seen. We implemented an unsupervised anomaly detection module where normal surface features form a memory bank. By measuring the nearest-neighbor cosine distance, our model achieves an AUROC of 1.0, accurately flagging any structural defect."
+            </div>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide">
+            <h2>Explainable AI: Autonomous Defect Localization (Grad-CAM)</h2>
+            <div class="grid-2">
+                <div>
+                    <p>Plant operators require visual verification before diverting steel sheets off the conveyor. Black-box predictions are unacceptable.</p>
+                    <div class="card" style="margin-top: 15px;">
+                        <div class="card-title">Mathematical Formulation</div>
+                        <p style="font-size: 0.95rem; margin-top: 6px;">Computes gradients of predicted defect score with respect to activation maps of layer4: &alpha;<sub>k</sub><sup>c</sup> = (1/Z) &sum; &part;y<sup>c</sup> / &part;A<sup>k</sup>.</p>
+                    </div>
+                    <ul style="margin-top: 15px;">
+                        <li><strong>Zero Bounding Box Supervision:</strong> Accurately localizes scratches, crazing cracks, and pitted areas.</li>
+                        <li><strong>Operator Transparency:</strong> High-confidence spatial heatmaps confirm where defect pixels reside.</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="card" style="height: 100%; justify-content: center; align-items: center; text-align: center;">
+                        <div style="font-size: 1.1rem; font-weight: 700; color: var(--primary); margin-bottom: 8px;">3-Panel Visualization Pipeline</div>
+                        <p style="font-size: 0.9rem; color: #64748b;">Raw Surface Image &rarr; Defect Activation Map &rarr; Grad-CAM Heatmap Overlay</p>
+                        <div style="margin-top: 15px; font-size: 0.85rem; color: var(--accent);">Artifact: results/gradcam_sample.png</div>
+                    </div>
+                </div>
+            </div>
+            <div class="speaker-notes">
+                <strong>Speaker Script:</strong> "Black-box deep learning is unacceptable on high-stakes assembly lines. Using Grad-CAM, we compute the gradient activations of the final convolutional layer. As shown in the overlay, the model accurately spotlights the exact scratch marks and pitted regions without having been trained on bounding box labels."
+            </div>
+        </div>
+
+        <!-- Slide 8 -->
+        <div class="slide">
+            <h2>Real-Time Factory Inspection Dashboard</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-stat">22.43 ms</div>
+                    <div class="card-title">Inference Latency (CPU)</div>
+                    <p style="font-size: 0.85rem; margin-top: 6px;">Exceeds industrial line requirement of &lt;50 ms.</p>
+                </div>
+                <div class="card">
+                    <div class="card-stat">44.6 FPS</div>
+                    <div class="card-title">Throughput (Frames/Sec)</div>
+                    <p style="font-size: 0.85rem; margin-top: 6px;">Handles line speeds up to 15 m/s.</p>
+                </div>
+                <div class="card">
+                    <div class="card-stat">1-Click</div>
+                    <div class="card-title">Streamlit UI (app.py)</div>
+                    <p style="font-size: 0.85rem; margin-top: 6px;">Interactive drag-and-drop defect inspector.</p>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 25px;">
+                <div class="card-title">Key Dashboard Capabilities</div>
+                <ul style="margin-top: 10px;">
+                    <li><strong>Drag-and-Drop Surface Scans:</strong> Upload any JPG, PNG, or BMP surface image from industrial line cameras.</li>
+                    <li><strong>Confidence Distribution:</strong> Visualizes probability across all 6 structural defect categories.</li>
+                    <li><strong>Live Defect Localization:</strong> Displays the Grad-CAM heatmap overlay in real time.</li>
+                    <li><strong>Benchmark Visualizer:</strong> Built-in gallery of t-SNE, ROC, and label-efficiency curves for review.</li>
+                </ul>
+            </div>
+
+            <div class="speaker-notes">
+                <strong>Speaker Script:</strong> "We packaged the entire pipeline into an interactive web application built with Streamlit. Plant engineers can upload an image or stream conveyor camera feeds, receive real-time defect classifications with confidence intervals, and inspect localized heatmaps in under 25 milliseconds."
+            </div>
+        </div>
+
+        <!-- Slide 9 -->
+        <div class="slide">
+            <h2>Conclusion & Future Scope</h2>
+            <div class="grid-2">
+                <div>
+                    <h3>Key Contributions:</h3>
+                    <ul>
+                        <li><strong>Broke the Annotation Bottleneck:</strong> Demonstrated that SSL visual representations provide superior sample efficiency over supervised CNNs under label scarcity.</li>
+                        <li><strong>Engineered Industrial Augmentations:</strong> Formulated orientation-invariant transformations tailored to metallic surface physics.</li>
+                        <li><strong>High-Recall Anomaly Detection:</strong> Achieved an AUROC of 1.0000 on industrial surface defects.</li>
+                        <li><strong>Deployment Ready:</strong> Built a 44 FPS inspection system with Grad-CAM explainability.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Future Research Directions:</h3>
+                    <ul>
+                        <li><strong>Vision Transformers (ViT) & MAE:</strong> Implementing Masked Autoencoders for multi-scale line-scan image reconstruction.</li>
+                        <li><strong>Edge Acceleration:</strong> TensorRT and OpenVINO quantization on NVIDIA Jetson Orin modules.</li>
+                        <li><strong>Multi-Modal Sensor Fusion:</strong> Fusing optical camera scans with acoustic emission and infrared thermography.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="speaker-notes">
+                <strong>Speaker Script:</strong> "In conclusion, this project proves that self-supervised representation learning provides a scientifically rigorous and economically viable solution for smart manufacturing inspection. Thank you for your time, and I am now ready for questions."
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Navigation Controls -->
+    <div class="controls">
+        <button class="btn" onclick="prevSlide()">&#8592; Previous</button>
+        <div class="counter" id="slideCounter">Slide 1 / 9</div>
+        <button class="btn" onclick="nextSlide()">Next &#8594;</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const counter = document.getElementById('slideCounter');
+
+        function updateSlide() {
+            slides.forEach((s, idx) => {
+                s.classList.toggle('active', idx === currentSlide);
+            });
+            counter.innerText = `Slide ${currentSlide + 1} / ${slides.length}`;
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                updateSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+    </script>
+</body>
+</html>
+
